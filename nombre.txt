@@ -1,3 +1,3 @@
-A.U.R.A.: 
-Automated Voice Recognition Assistant 
-	Asistente de reconocimiento de voz automatizado
+A.L.B.A.: 
+Asistente de Lectura y Búsqueda Avanzada
+	Advanced Reading and Search Assistant

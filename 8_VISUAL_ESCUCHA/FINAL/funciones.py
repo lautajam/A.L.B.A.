@@ -8,8 +8,7 @@ def onClick_escuchar(resultado, escuchando):
     print("Escuchando")
     escuchando.config(text="Escuchando")  # muestra el texto escuchado en el label "resultado"
     escuchando.update()
-    resultado.config(text="Transcripción:: ")
-    resultado.update()
+
     # Crear un objeto Recognizer
     r = sr.Recognizer()
 

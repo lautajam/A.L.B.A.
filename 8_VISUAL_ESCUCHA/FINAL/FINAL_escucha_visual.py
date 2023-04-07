@@ -11,7 +11,7 @@ style = ttk.Style()
 style.configure("MyStyle.TButton", font=("Arial", 14), padding=10, background="blue", foreground="black")
 style.configure("MyStyleStop.TButton", font=("Arial", 14), padding=10, background="red", foreground="black")
 style.configure("MyStyle.TLabel", font=("Arial", 14), padding=10, foreground="black")
-root.title("A.U.R.A.")
+root.title("A.L.B.A.")
 root.geometry("800x300")
 
 # Crea las aprtes del programa
@@ -24,10 +24,10 @@ label2.pack(pady=(0,20))
 frame = ttk.Frame(root)
 frame.pack()
 
-resultado = ttk.Label(root, text="Transcripción: ", style="MyStyle.TLabel")
+resultado = ttk.Label(root, text="--- ", style="MyStyle.TLabel")
 resultado.pack(pady=(10, 0))
 
-escuchando = ttk.Label(root, text="", style="MyStyle.TLabel")
+escuchando = ttk.Label(root, text="Sin escuchar", style="MyStyle.TLabel")
 escuchando.pack(pady=(5, 0))
 
 escuchar = ttk.Button(frame, text="Escuchar", style="MyStyle.TButton", command=lambda:start_listening(resultado, escuchando))
