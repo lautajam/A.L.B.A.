@@ -8,7 +8,7 @@ def onClick_escuchar(resultado, escuchando):
     print("Escuchando")
     escuchando.config(text="Escuchando")  # muestra el texto escuchado en el label "resultado"
     escuchando.update()
-    resultado.config(text="Transcripción:: ")  # muestra el texto escuchado en el label "resultado"
+    resultado.config(text="Transcripción:: ")
     resultado.update()
     # Crear un objeto Recognizer
     r = sr.Recognizer()
@@ -31,11 +31,13 @@ def onClick_escuchar(resultado, escuchando):
                 print("Escucha detenida")
                 resultado.config(text="Transcripción: " + text)  # muestra el texto escuchado en el label "resultado"
                 resultado.update()  # actualiza el label para que muestre el texto inmediatamente
-                escuchando.config(text="Escucha detenida")  # muestra el texto escuchado en el label "resultado"
+                escuchando.config(text="Escucha detenida")
                 escuchando.update()
                 break
         except sr.UnknownValueError as e:
             print("No te he entendido bien!")
+            resultado.config(text="No te he entendido bien!")
+            resultado.update()
         except sr.RequestError as e:
             print("Error al conectarse con el servicio de reconocimiento de voz; {0}".format(e))
 
