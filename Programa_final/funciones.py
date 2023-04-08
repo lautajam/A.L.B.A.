@@ -9,7 +9,7 @@ import speech_recognition as sr
 def onClick_detener():
     print("Lectura detenida")
 
-def busquedaLectura(text):
+def busquedaLectura(text, donde_busca):
     # Crear un objeto Recognizer
     r = sr.Recognizer()
 
@@ -25,6 +25,9 @@ def busquedaLectura(text):
     result = next(search(text, num_results=1))
 
     print(result)
+
+    donde_busca.config(text="Busqueda en: " + result)
+    donde_busca.update()
 
     # Hacer la petición HTTP y obtener el contenido de la página
     response = requests.get(result)
@@ -49,12 +52,16 @@ def busquedaLectura(text):
 
     # Ejecutar la lectura
     engine.runAndWait()
-    pass
 
-def onClick_escuchar(resultado, escuchando):
+def onClick_escuchar(resultado, escuchando, donde_busca):
+
     print("Escuchando")
     escuchando.config(text="Escuchando")  # muestra el texto escuchado en el label "resultado"
     escuchando.update()
+
+    print("Busqueda en: ---")
+    donde_busca.config(text="Busquda en: ---")
+    donde_busca.update()
 
     # Crear un objeto Recognizer
     r = sr.Recognizer()
@@ -63,7 +70,7 @@ def onClick_escuchar(resultado, escuchando):
     while 1:
         # Utilizar el micrófono como fuente de audio
         with sr.Microphone() as source:
-            print("Di algo:")
+            print("¿Qué quieres que busque? ")
             audio = r.listen(source, timeout=500)
 
         # Intentar transcribir el audio
@@ -72,13 +79,15 @@ def onClick_escuchar(resultado, escuchando):
             print("Transcripción: ", text)
             resultado.config(text="Transcripción: " + text)  # muestra el texto escuchado en el label "resultado"
             resultado.update()  # actualiza el label para que muestre el texto inmediatamente
-            busquedaLectura(text)
+            busquedaLectura(text, donde_busca)
             if "stop" == text.lower() or "estop" == text.lower() or "es top" == text.lower():
                 print("Escucha detenida")
                 resultado.config(text="Transcripción: " + text)  # muestra el texto escuchado en el label "resultado"
-                resultado.update()  # actualiza el label para que muestre el texto inmediatamente
                 escuchando.config(text="Escucha detenida")
+                donde_busca.config(text="Busquda en: ---")
+                resultado.update()  # actualiza el label para que muestre el texto inmediatamente
                 escuchando.update()
+                donde_busca.update()
                 break
         except sr.UnknownValueError as e:
             print("No te he entendido bien!")
@@ -87,7 +96,7 @@ def onClick_escuchar(resultado, escuchando):
         except sr.RequestError as e:
             print("Error al conectarse con el servicio de reconocimiento de voz; {0}".format(e))
 
-def start_listening(resultado, escuchando):
+def start_listening(resultado, escuchando, donde_busca):
     # Crear un hilo para ejecutar la función onClick_escuchar
-    t = threading.Thread(target=onClick_escuchar, args=(resultado,escuchando,))
+    t = threading.Thread(target=onClick_escuchar, args=(resultado,escuchando,donde_busca,))
     t.start()

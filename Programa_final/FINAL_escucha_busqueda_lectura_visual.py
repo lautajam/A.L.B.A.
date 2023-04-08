@@ -30,10 +30,10 @@ resultado.pack(pady=(10, 0))
 escuchando = ttk.Label(root, text="Sin escuchar", style="MyStyle.TLabel")
 escuchando.pack(pady=(5, 0))
 
-donde_busca = ttk.Label(root, text="aaaaaaaaaaaaa", style="MyStyle.TLabel")
+donde_busca = ttk.Label(root, text="---", style="MyStyle.TLabel")
 donde_busca.pack(pady=(5, 0))
 
-escuchar = ttk.Button(frame, text="Escuchar", style="MyStyle.TButton", command=lambda:start_listening(resultado, escuchando))
+escuchar = ttk.Button(frame, text="Escuchar", style="MyStyle.TButton", command=lambda:start_listening(resultado, escuchando, donde_busca))
 escuchar.pack(side=tk.LEFT, padx=(0, 30))
 
 parar = ttk.Button(frame, text="Detener lectura", style="MyStyleStop.TButton", command=onClick_detener)
