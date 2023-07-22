@@ -6,15 +6,28 @@ from bs4 import BeautifulSoup
 import pyttsx3
 import speech_recognition as sr
 
-def onClick_detener():
-    print("Lectura detenida")
+# Inicializar el motor de texto a voz
+engine = pyttsx3.init()
 
-def busquedaLectura(text, donde_busca):
-    # Crear un objeto Recognizer
+def onClick_detener(resultado, escuchando, donde_busca):
+    print("Lectura detenida")
+    escuchando.config(text="Escuchando | Lectura detenida")
+    escuchando.update()
+
+    donde_busca.config(text="Busquda en: ---")
+    donde_busca.update()
+
+    resultado.config(text="Transcripción: ---")
+    resultado.update()
+
+def busquedaLectura(text, donde_busca, escuchando):
+
+    # Llamar globables
+    # Crear un objeto Recognize
     r = sr.Recognizer()
 
-    # Inicializar el motor de texto a voz
-    engine = pyttsx3.init()
+    r.pause_threshold = 5
+    global engine
 
     # Configurar la voz
     voices = engine.getProperty('voices')
@@ -56,7 +69,7 @@ def busquedaLectura(text, donde_busca):
 def onClick_escuchar(resultado, escuchando, donde_busca):
 
     print("Escuchando")
-    escuchando.config(text="Escuchando")  # muestra el texto escuchado en el label "resultado"
+    escuchando.config(text="Escuchando")
     escuchando.update()
 
     print("Busqueda en: ---")
@@ -77,9 +90,10 @@ def onClick_escuchar(resultado, escuchando, donde_busca):
         try:
             text = r.recognize_google(audio, language='es-ES')
             print("Transcripción: ", text)
+            print("Escuchando")
             resultado.config(text="Transcripción: " + text)  # muestra el texto escuchado en el label "resultado"
             resultado.update()  # actualiza el label para que muestre el texto inmediatamente
-            busquedaLectura(text, donde_busca)
+            busquedaLectura(text, donde_busca, escuchando)
             if "stop" == text.lower() or "estop" == text.lower() or "es top" == text.lower():
                 print("Escucha detenida")
                 resultado.config(text="Transcripción: " + text)  # muestra el texto escuchado en el label "resultado"
@@ -99,4 +113,9 @@ def onClick_escuchar(resultado, escuchando, donde_busca):
 def start_listening(resultado, escuchando, donde_busca):
     # Crear un hilo para ejecutar la función onClick_escuchar
     t = threading.Thread(target=onClick_escuchar, args=(resultado,escuchando,donde_busca,))
+    t.start()
+
+def stop_reading(resultado, escuchando, donde_busca):
+    # Crear un hilo para ejecutar la función onClick_escuchar
+    t = threading.Thread(target=onClick_detener, args=(resultado, escuchando, donde_busca,))
     t.start()
