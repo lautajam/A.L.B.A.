@@ -1,11 +1,11 @@
 import webbrowser
 from googlesearch import search
 
-query = input("¿Que quiere buscar en google? ")  # define la consulta de búsqueda
+query = input("What do you want to search in google? ") # define search query
 
-# Obtén el primer resultado de la búsqueda
+# get the first result of the search
 result = next(search(query, num_results=1))
 
-# Abre la página en Brave
+# Open the page in Brave
 webbrowser.register('brave', None, webbrowser.BackgroundBrowser("C://Program Files//BraveSoftware//Brave-Browser//Application//brave.exe"))
 webbrowser.get('brave').open(result)

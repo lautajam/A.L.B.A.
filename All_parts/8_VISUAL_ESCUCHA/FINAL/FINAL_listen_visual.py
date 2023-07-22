@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from funciones import start_listening, stop_reading
+from functions import onClick_detener, onClick_escuchar, start_listening
 
 # Crea la ventana
 root = tk.Tk()
@@ -24,19 +24,19 @@ label2.pack(pady=(0,20))
 frame = ttk.Frame(root)
 frame.pack()
 
-resultado = ttk.Label(root, text="---", style="MyStyle.TLabel")
+resultado = ttk.Label(root, text="--- ", style="MyStyle.TLabel")
 resultado.pack(pady=(10, 0))
 
 escuchando = ttk.Label(root, text="Sin escuchar", style="MyStyle.TLabel")
 escuchando.pack(pady=(5, 0))
 
-donde_busca = ttk.Label(root, text="---", style="MyStyle.TLabel")
+donde_busca = ttk.Label(root, text="aaaaaaaaaaaaa", style="MyStyle.TLabel")
 donde_busca.pack(pady=(5, 0))
 
-escuchar = ttk.Button(frame, text="Escuchar", style="MyStyle.TButton", command=lambda:start_listening(resultado, escuchando, donde_busca))
+escuchar = ttk.Button(frame, text="Escuchar", style="MyStyle.TButton", command=lambda:start_listening(resultado, escuchando))
 escuchar.pack(side=tk.LEFT, padx=(0, 30))
 
-parar = ttk.Button(frame, text="Detener lectura", style="MyStyleStop.TButton", command=lambda:stop_reading(resultado, escuchando, donde_busca))
+parar = ttk.Button(frame, text="Detener lectura", style="MyStyleStop.TButton", command=onClick_detener)
 parar.pack(side=tk.LEFT, padx=(30, 0))
 
 root.mainloop()
