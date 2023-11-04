@@ -1,7 +1,6 @@
 import webbrowser
 from googlesearch import search
 
-
 def web_search():
     """
     This function searches for the input query in google and opens the first result in Brave

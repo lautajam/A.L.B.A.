@@ -1,8 +1,8 @@
-from visual.GUI import GUI, tk
+from visual.MainScreen import main_screen, tk
 
 def main():
     root = tk.Tk()
-    GUI(root)
+    main_screen(root)
     root.mainloop()
 
 if __name__ == "__main__":
